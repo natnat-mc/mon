@@ -2,5 +2,8 @@
 /lua
 /lua_modules
 /.luarocks
+
 *.lua
 /out
+
+!/config.lua
