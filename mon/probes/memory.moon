@@ -9,6 +9,7 @@ import readproc from require 'mon.util'
 			result["#{name}:#{k}"] =
 				value: tonumber string.match v, '[0-9.]+'
 				unit: string.gsub (string.match v, '[a-zA-Z]+'), 'i', ''
+				min: 0
 
 	total, used, free, shared, buffers, cache, available = string.match data, 'Mem:%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)'
 	add 'mem', :total, :used, :free, :shared, :buffers, :cache, :available
