@@ -11,14 +11,10 @@ args =
 	color: true
 	delay: 1
 	reload: false
+	moon: false
 
 do -- handle environment
 	args.color = false if os.getenv 'NOCOLOR'
-
-do -- default config file
-	config_dir = os.getenv "XDG_CONFIG_HOME"
-	config_dir = "#{os.getenv "HOME"}/.config" unless config_dir
-	args.config = "#{config_dir}/mon.lua"
 
 do -- parse CLI args
 	i, len = 1, #arg
@@ -26,12 +22,13 @@ do -- parse CLI args
 		a = arg[i]
 		switch a
 			when '-h', '--help'
-				io.write "#{arg[0]} [-1] [-j] [-c|-C] [-f FILE] [-r] [-d DELAY]\n"
+				io.write "#{arg[0]} [-1] [-j] [-c|-C] [-f FILE] [-m] [-r] [-d DELAY]\n"
 				io.write "\t-1 Disable loop\n"
 				io.write "\t-j JSON output\n"
 				io.write "\t-c Color output (default unless $NO_COLOR is set)\n"
 				io.write "\t-C Disable color output\n"
 				io.write "\t-f Set config file (defaults to $XDG_CONFIG_HOME/mon.lua or $HOME/.config/mon.lua)\n"
+				io.write "\t-m Load config as moonscript instead of lua\n"
 				io.write "\t-r Reload config file each display\n"
 				io.write "\t-d Set delay between two displays (defaults to 1; must be understood by the `sleep` command)\n"
 				return 0
@@ -48,6 +45,8 @@ do -- parse CLI args
 				args.config = assert arg[i+1], "Missing argument to -f"
 				assert (exists args.config), "Config file not found: #{args.file}"
 				i += 1
+			when '-m'
+				args.moon = true
 			when '-r'
 				args.reload = true
 			when '-d'
@@ -57,6 +56,13 @@ do -- parse CLI args
 				error "Unrecognized argument #{a}"
 		i += 1
 
+unless args.config -- default config file
+	config_dir = os.getenv "XDG_CONFIG_HOME"
+	config_dir = "#{os.getenv "HOME"}/.config" unless config_dir
+	ext = 'lua'
+	ext = 'moon' if args.moon
+	args.config = "#{config_dir}/mon.#{ext}"
+
 -- load config
 local config
 loadconfig = ->
@@ -64,7 +70,12 @@ loadconfig = ->
 		readfile args.config
 	else
 		"return {}"
-	fn = assert (loadstring or load) code
+	fn = nil
+	if args.moon
+		import loadstring from require 'moonscript'
+		fn = assert loadstring code
+	else
+		fn = assert (loadstring or load) code
 	config = fn! or {}
 
 	config.namemap or= {}
