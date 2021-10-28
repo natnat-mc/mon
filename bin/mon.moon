@@ -209,7 +209,7 @@ if args.loop
 	while true
 		writer = Writer!
 		writer (string.char 0x1b), '[2J', (string.char '0x1b'), '[0;0H', display probe!
-		print writer
+		io.write writer
 		sleep args.delay
 		loadconfig! if args.reload
 else
@@ -217,4 +217,4 @@ else
 	if args.json
 		print tojson data
 	else
-		print display data
+		io.write display data
