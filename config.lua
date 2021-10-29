@@ -34,6 +34,7 @@ local function display(data)
 	add 'hostname:hostname'
 	add 'uname:v'
 	add 'lsbrelease:desc'
+	add 'mon:value'
 	ignoreall '^lsbrelease:'
 	ignoreall '^uname:'
 	write ''
@@ -94,7 +95,6 @@ local namemap = setmetatable({
 
 local probes = {
 	{name='mon.probes.backlight', args={name='intel_backlight'}},
-	-- {name='mon.probes.backlight'},
 	{name='mon.probes.battery', args={bat='BAT1', adp='ADP1'}},
 	{name='mon.probes.datetime'},
 	{name='mon.probes.hostname'},
@@ -104,6 +104,14 @@ local probes = {
 	{name='mon.probes.sensors'},
 	{name='mon.probes.uname'},
 	{name='mon.probes.uptime'},
+	{
+		name='mon.probes.adhoc',
+		args={
+			name="System monitor - Name",
+			value=function() return 'mon' end
+		},
+		prefix='mon'
+	}
 }
 
 return {

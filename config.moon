@@ -25,6 +25,7 @@ display = (data) ->
 	add 'hostname:hostname'
 	add 'uname:v'
 	add 'lsbrelease:desc'
+	add 'mon:value'
 	ignoreall '^lsbrelease:'
 	ignoreall '^uname:'
 	write ''
@@ -88,6 +89,7 @@ probes = {
 	{name: 'mon.probes.sensors'},
 	{name: 'mon.probes.uname'},
 	{name: 'mon.probes.uptime'},
+	{name: 'mon.probes.adhoc', args: {name: "System monitor - Name", value: -> 'mon'}, prefix: 'mon'}
 }
 
 { :display, :namemap, :probes }
