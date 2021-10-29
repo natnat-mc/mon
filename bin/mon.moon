@@ -220,7 +220,7 @@ if args.loop
 	while true
 		writer = Writer!
 		writer (string.char 0x1b), '[2J', (string.char '0x1b'), '[0;0H', display probe!
-		io.write writer
+		io.write tostring writer
 		sleep args.delay
 		loadconfig! if args.reload
 else
