@@ -4,7 +4,7 @@ import readnumber from require 'mon.util'
 	import name from args
 	-- TODO: fill in name if nil
 	{
-		"backlight:#{name}:level":
+		level:
 			value: ->
 				curr = readnumber "/sys/class/backlight/#{name}/brightness"
 				max = readnumber "/sys/class/backlight/#{name}/max_brightness"

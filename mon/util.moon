@@ -23,16 +23,9 @@ exists = (file) ->
 sleep = (duration) ->
 	assert os.execute "sleep #{duration}"
 
-merge = (tables) ->
-	merged = {}
-	for t in *tables
-		merged[k] = v for k, v in pairs t
-	merged
-
 {
 	:readfile, :readline, :readnumber
 	:readproc, :readprocline, :readprocnumber
 	:exists
 	:sleep
-	:merge
 }

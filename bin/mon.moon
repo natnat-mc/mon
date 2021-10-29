@@ -1,7 +1,7 @@
 #!/usr/bin/env moon
 
 import encode from require 'mon.json'
-import readfile, exists, merge, sleep from require 'mon.util'
+import readfile, exists, sleep from require 'mon.util'
 Writer = require 'mon.writer'
 
 -- parse args
@@ -97,9 +97,12 @@ loadconfig = ->
 probe = ->
 	data = {}
 	for probe in *config.probes
+		import prefix from probe
+		prefix or= string.match probe.name, '[^.]+$'
 		fn = require probe.name
-		table.insert data, fn probe.args
-	data = merge data
+		probedata = fn probe.args
+		for k, v in pairs probedata
+			data["#{prefix}:#{k}"] = v
 
 	for rawname, data in pairs data
 		data.name = rawname unless data.name

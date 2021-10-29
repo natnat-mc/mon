@@ -5,16 +5,16 @@ import readproc from require 'mon.util'
 	load1, load5, load15 = (tonumber load1), (tonumber load5), (tonumber load15)
 
 	{
-		'uptime:uptime':
+		uptime:
 			value: uptime
 			name: "System - Uptime"
-		'uptime:load1':
+		load1:
 			value: load1
 			name: "System - Load - 1 min"
-		'uptime:load5':
+		load5:
 			value: load5
 			name: "System - Load - 5 min"
-		'uptime:load15':
+		load15:
 			value: load15
 			name: "System - Load - 15 min"
 	}

@@ -39,7 +39,7 @@ import match from string
 					current.low[1] = v
 				elseif match k, '_input$'
 					current.value = v
-					result["sensors:#{category}:#{sensor}"] = current
+					result["#{category}:#{sensor}"] = current
 
 			current.low = nil unless next current.low
 			current.high = nil unless next current.high

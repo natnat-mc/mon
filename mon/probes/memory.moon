@@ -12,17 +12,17 @@ import readproc from require 'mon.util'
 				min: 0
 
 	total, used, free, shared, buffers, cache, available = string.match data, 'Mem:%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)%s+(%S+)'
-	add 'mem', :total, :used, :free, :shared, :buffers, :cache, :available
+	add 'ram', :total, :used, :free, :shared, :buffers, :cache, :available
 	total, used, free = string.match data, 'Swap:%s+(%S+)%s+(%S+)%s+(%S+)'
 	add 'swap', :total, :used, :free
 
-	result['mem:total'].name = "RAM - Total"
-	result['mem:free'].name = "RAM - Free"
-	result['mem:available'].name = "RAM - Available"
-	result['mem:used'].name = "RAM - Used (user)"
-	result['mem:buffers'].name = "RAM - Used (buffers)"
-	result['mem:cache'].name = "RAM - Used (cache)"
-	result['mem:shared'].name = "RAM - Used (shared)"
+	result['ram:total'].name = "RAM - Total"
+	result['ram:free'].name = "RAM - Free"
+	result['ram:available'].name = "RAM - Available"
+	result['ram:used'].name = "RAM - Used (user)"
+	result['ram:buffers'].name = "RAM - Used (buffers)"
+	result['ram:cache'].name = "RAM - Used (cache)"
+	result['ram:shared'].name = "RAM - Used (shared)"
 
 	result['swap:total'].name = "Swap - Total"
 	result['swap:free'].name = "Swap - Free"

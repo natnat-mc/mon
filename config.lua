@@ -43,19 +43,19 @@ local function display(data)
 	ignoreall '^datetime:'
 	write ''
 
-	add 'battery:BAT1:level'
-	add 'battery:BAT1:status'
-	add 'charger:ADP1:status'
-	add 'backlight:intel_backlight:level'
+	add 'battery:level'
+	add 'battery:status'
+	add 'battery:charger'
+	add 'backlight:level'
 	addall '^sensors:BAT1%-acpi%-0:'
 	write ''
 
-	add 'mem:used'
-	add 'mem:free'
-	add 'mem:available'
-	add 'mem%:used'
-	add 'mem%:free'
-	add 'mem%:available'
+	add 'memory:ram:used'
+	add 'memory:ram:free'
+	add 'memory:ram:available'
+	add 'memorypct:ram:used'
+	add 'memorypct:ram:free'
+	add 'memorypct:ram:available'
 	ignoreall '^mem:'
 	ignoreall '^swap:'
 	write ''
@@ -63,8 +63,8 @@ local function display(data)
 	addall '^uptime:'
 	write ''
 
-	addall '^ipv4:'
-	addall '^ipv6:'
+	addall '^hostname:ipv4:'
+	addall '^hostname:ipv6:'
 	write ''
 
 	ignoreall '^sensors:coretemp%-isa%-0000:Core'
@@ -75,10 +75,10 @@ local function display(data)
 end
 
 local namemap = setmetatable({
-	['battery:BAT1:level'] = "Battery - Level",
-	['battery:BAT1:status'] = "Battery - Status",
-	['charger:ADP1:status'] = "Charger - Status",
-	['backlight:intel_backlight:level'] = "Backlight - Level",
+	['battery:level'] = "Battery - Level",
+	['battery:status'] = "Battery - Status",
+	['battery:charger'] = "Charger - Status",
+	['backlight:level'] = "Backlight - Level",
 	['sensors:BAT1-acpi-0:curr1'] = "Sensors - Battery - Current",
 	['sensors:BAT1-acpi-0:in0'] = "Sensors - Battery - Voltage",
 	['sensors:acpitz-acpi-0:temp1'] = "Sensors - Motherboard - Temp",

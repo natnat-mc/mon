@@ -2,7 +2,7 @@ import readproc, readprocline from require 'mon.util'
 
 ->
 	output =
-		'hostname:hostname':
+		hostname:
 			value: -> readprocline 'hostname'
 			name: "System - Hostname"
 
