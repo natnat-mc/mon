@@ -55,8 +55,8 @@ display = (data) ->
 	addall '^uptime:'
 	write ''
 
-	addall '^hostname:ipv4:'
-	addall '^hostname:ipv6:'
+	addall '^hostnamei:ipv4:'
+	addall '^hostnamei:ipv6:'
 	write ''
 
 	ignoreall '^sensors:coretemp%-isa%-0000:Core'
@@ -83,6 +83,7 @@ probes = {
 	{name: 'mon.probes.battery'},
 	{name: 'mon.probes.datetime'},
 	{name: 'mon.probes.hostname'},
+	{name: 'mon.probes.hostnamei'},
 	{name: 'mon.probes.lsbrelease'},
 	{name: 'mon.probes.memory'},
 	{name: 'mon.probes.memorypct'},
