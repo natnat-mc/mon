@@ -1,8 +1,13 @@
-import readline, readnumber from require 'mon.util'
+import readline, readnumber, ls from require 'mon.util'
 
-(args) ->
+(args={}) ->
 	import bat, adp from args
-	-- TODO: fill in name if nil
+	unless bat or adp
+		files = ls '/sys/class/power_supply'
+		for file in *files
+			bat = file if not bat and string.match file, '^BAT'
+			adp = file if not adp and string.match file, '^ADP'
+	return {} unless bat and adp
 	{
 		level:
 			value: -> readnumber "/sys/class/power_supply/#{bat}/capacity"

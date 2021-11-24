@@ -79,8 +79,8 @@ namemap =
 	'sensors:pch_cometlake-virtual-0:temp1': "Sensors - CPU - PCH - Temp",
 
 probes = {
-	{name: 'mon.probes.backlight', args: {name: 'intel_backlight'}},
-	{name: 'mon.probes.battery', args: {bat: 'BAT1', adp: 'ADP1'}},
+	{name: 'mon.probes.backlight'},
+	{name: 'mon.probes.battery'},
 	{name: 'mon.probes.datetime'},
 	{name: 'mon.probes.hostname'},
 	{name: 'mon.probes.lsbrelease'},

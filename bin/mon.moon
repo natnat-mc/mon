@@ -75,7 +75,7 @@ loadconfig = ->
 		import loadstring from require 'moonscript'
 		fn = assert loadstring code
 	else
-		fn = assert (loadstring or load) code
+		fn = assert load code
 	config = fn! or {}
 
 	config.namemap or= {}

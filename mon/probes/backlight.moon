@@ -1,8 +1,10 @@
-import readnumber from require 'mon.util'
+import readnumber, ls from require 'mon.util'
 
 (args={}) ->
 	import name from args
-	-- TODO: fill in name if nil
+	unless name
+		name = (ls '/sys/class/backlight')[1]
+	return {} unless name
 	{
 		level:
 			value: ->
